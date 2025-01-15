@@ -1,19 +1,22 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Login from './Login';
+import Dashboard from './Dashboard';
 
-function App() {
- 
+const App = () => {
+  const [user, setUser ] = useState(null);
+
+  const handleLogin = (userData) => {
+    setUser (userData);
+  };
 
   return (
-    <>
-      <div>
-        Hello
-      </div>
-     
-    </>
-  )
-}
+    <Router>
+      <Routes>
+        <Route path="/" element={user ? <Dashboard user={user} /> : <Login onLogin={handleLogin} />} />
+      </Routes>
+    </Router>
+  );
+};
 
-export default App
+export default App;
